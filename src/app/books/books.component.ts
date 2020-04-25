@@ -14,16 +14,16 @@ export class BooksComponent implements OnInit {
   public libraries: Library[];
   public libraryBooks: Book[] = [];
 
-  constructor(private dataService: DataService) {
-    dataService.getLibraries().subscribe(result => {
-        this.libraries = result;  
-    }, error => {
-        console.error(error);
-        this.libraryBooks = [];
-    }); 
-  }
+  constructor(private dataService: DataService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.dataService.getLibraries().subscribe(result => {
+      this.libraries = result;  
+  }, error => {
+      console.error(error);
+      this.libraryBooks = [];
+  }); 
+  }
 
   filterLibrary(filterVal: any) {
          this.dataService.getLibraryBooks(filterVal).subscribe(result => {
